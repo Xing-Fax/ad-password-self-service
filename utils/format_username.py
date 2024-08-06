@@ -6,7 +6,12 @@
 # @Mail:           xiangle0109@outlook.com
 # @Date：          2021/4/19 9:17
 
+# @ModifiedDate：  2024/8/6 11:15
+# @Content：       新增get_name_from_email函数
+# @Author：        邢传真
+# @Mail：          chuanzhen.xing@oebiotech.com
 import re
+from utils.ad_ops import AdOps
 
 
 def get_email_from_userinfo(user_info):
@@ -16,7 +21,29 @@ def get_email_from_userinfo(user_info):
         return True, user_info.get('biz_mail')
     else:
         return False, "当前用户的邮箱或企业邮箱均没配置，请先完善个人信息！"
+    
+# 新增函数, 用于调用接口查询企微邮箱对应的AD域用户名称  
 
+# 新增时间: 2023-08-06  
+# 新增人: 邢传真 
+# 原因: 原项目代码不能适配公司系统, 企微邮箱前缀和域用户不一定对应
+def get_name_from_email(ad_ops, account):
+    """
+    查询用户的域账号名称, 如 chuanzhen.xing,
+    :param accout: 用户企微邮箱
+    :return : 域用户名称
+    """
+    if account is None:
+        return False, NameError(
+            "传入的用户账号为空！".format(account))
+    try:
+        result = ad_ops.ad_get_get_sAMAccountName_by_email(account)
+        if result[0]:  
+            return result[1]
+        else:  
+            print(f"常规错误: {result[1]}")
+    except Exception as e:
+        return False, NameError("查询失败, 错误信息[{}]".format(account, e))
 
 def format2username(account):
     """

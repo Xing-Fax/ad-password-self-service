@@ -6,7 +6,7 @@ import traceback
 from django.shortcuts import render
 from utils.ad_ops import AdOps
 import urllib.parse as url_encode
-from utils.format_username import format2username, get_user_is_active, get_email_from_userinfo
+from utils.format_username import format2username, get_user_is_active, get_email_from_userinfo, get_name_from_email
 from .form import CheckForm
 from .utils import code_2_user_detail, ops_account
 from utils.tracecalls import decorator_logger
@@ -88,8 +88,10 @@ def index(request):
                 'button_display': "重新认证授权"
             }
             return render(request, msg_template, context)
-        # 格式化用户名
-        _, username = format2username(username)
+        # 得到AD域用户名称
+        _, username = get_name_from_email((AdOps(), username))
+        # # 格式化用户名
+        # _, username = format2username(AdOps(), username)
         if _ is False:
             context = {
                 'global_title': TITLE,

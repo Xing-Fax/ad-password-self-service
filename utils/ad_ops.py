@@ -143,7 +143,29 @@ class AdOps(object):
             return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。"
         except Exception as e:
             return False, "AdOps Exception: {}".format(e)
-
+        
+    # 新增函数, 用于企微邮箱转AD域用户名称  
+ 
+    # 新增时间: 2023-08-06  
+    # 新增人: 邢传真 
+    # 原因: 原项目代码不能适配公司系统, 企微邮箱前缀和域用户不一定对应
+    def ad_get_get_sAMAccountName_by_email(self, email):
+        """
+        通过用户的的企业微信邮箱得到用户AD域中的sAMAccountName属性(域账号)
+        :param email: 用户企微邮箱的地址
+        :return: tuple(bool, str or None) 
+        """
+        try:
+            self.__conn()
+            result = self.conn.search(BASE_DN, SEARCH_FILTER.format(email), attributes=['sAMAccountName'])
+            if result:  
+                user_info = result[0]  
+                return True, user_info.get('sAMAccountName')  
+            else:  
+                return False, "未找到用户"  
+        except Exception as e:  
+            return False, "AdOps Exception: {}".format(e)
+        
     @decorator_logger(logger, log_head='AdOps', pretty=True, indent=2, verbose=1)
     def ad_get_user_dn_by_account(self, username):
         """
