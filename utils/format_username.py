@@ -39,9 +39,9 @@ def get_name_from_email(ad_ops, account):
     try:
         result = ad_ops.ad_get_get_sAMAccountName_by_email(account)
         if result[0]:  
-            return result[1]
+            return True, result[1]
         else:  
-            print(f"常规错误: {result[1]}")
+            return True, account.lower()
     except Exception as e:
         return False, NameError("查询失败, 错误信息[{}]".format(account, e))
 
