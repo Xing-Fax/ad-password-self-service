@@ -159,7 +159,7 @@ class AdOps(object):
             self.__conn()
             result = self.conn.search(BASE_DN, SEARCH_FILTER.format(email), attributes=['sAMAccountName'])
             if result:  
-                user_info = result[0]  
+                # user_info = result[0]  
                 # logger.error("测试" + str(user_info))
                 # return True, user_info.get('sAMAccountName')  
                 return True, self.conn.entries[0]['distinguishedName']

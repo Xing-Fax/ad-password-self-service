@@ -176,7 +176,9 @@ def reset_password(request):
                         'button_display': "重新认证授权"
                     }
                     return render(request, msg_template, context)
-                _, username = format2username(email)
+                # 得到AD域用户名称
+                _, username = get_name_from_email(AdOps(), username)
+                # _, username = format2username(email)
                 if _ is False:
                     context = {
                         'global_title': TITLE,
