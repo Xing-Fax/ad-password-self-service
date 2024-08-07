@@ -177,7 +177,7 @@ def reset_password(request):
                     }
                     return render(request, msg_template, context)
                 # 得到AD域用户名称
-                _, username = get_name_from_email(AdOps(), username)
+                _, username = get_name_from_email(AdOps(), email)
                 # _, username = format2username(email)
                 if _ is False:
                     context = {
