@@ -157,7 +157,7 @@ class AdOps(object):
         """
         try:
             self.__conn()
-            self.conn.search(BASE_DN, "mail=" + email, attributes=['sAMAccountName'])
+            self.conn.search(BASE_DN, "(mail=" + email + ")", attributes=['sAMAccountName'])
             return True, self.conn.entries[0]['sAMAccountName']
         except Exception as e:  
             return False, "AdOps Exception: {}".format(e)
