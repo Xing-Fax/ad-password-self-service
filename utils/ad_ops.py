@@ -157,14 +157,8 @@ class AdOps(object):
         """
         try:
             self.__conn()
-            result = self.conn.search(BASE_DN, SEARCH_FILTER.format(email), attributes=['sAMAccountName'])
-            if result:  
-                # user_info = result[0]  
-                # logger.error("测试" + str(user_info))
-                # return True, user_info.get('sAMAccountName')  
-                return True, self.conn.entries[0]['sAMAccountName']
-            else:  
-                return False, "未找到用户"  
+            self.conn.search(BASE_DN, SEARCH_FILTER.format(email), attributes=['sAMAccountName'])
+            return True, self.conn.entries[0]['sAMAccountName']
         except Exception as e:  
             return False, "AdOps Exception: {}".format(e)
         
