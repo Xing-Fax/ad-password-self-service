@@ -115,7 +115,7 @@ done
 # fi
 
 
-PWD_SELF_SERVICE_IP = "10.100.192.39"
+PWD_SELF_SERVICE_IP="10.100.192.39"
 
 # while :; do echo
 #     read -p "请输入密码自助平台使用的本机IP: " PWD_SELF_SERVICE_IP
@@ -138,7 +138,7 @@ while :; do echo
 done
 
 
-PWD_SELF_SERVICE_DOMAIN = "aq.oebiotech.com"
+PWD_SELF_SERVICE_DOMAIN="aq.oebiotech.com"
 # while :; do echo
 #     read -p "请输入密码自助平台使用域名，例如：pwd.abc.com（不需要加http://或https://） " PWD_SELF_SERVICE_DOMAIN
 #     check_domain "${PWD_SELF_SERVICE_DOMAIN}"
