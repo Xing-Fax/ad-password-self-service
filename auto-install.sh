@@ -110,20 +110,22 @@ while :; do echo
     fi
 done
 
-if [[ "${ensure_yn}" = n ]]; then
-    exit 0
-fi
+# if [[ "${ensure_yn}" = n ]]; then
+#     exit 0
+# fi
 
 
-while :; do echo
-    read -p "请输入密码自助平台使用的本机IP: " PWD_SELF_SERVICE_IP
-    check_ip "${PWD_SELF_SERVICE_IP}"
-    if [[ $? -ne 0 ]]; then
-      echo "---输入的IP地址格式有误，请重新输入 ..."
-    else
-      break
-    fi
-done
+$PWD_SELF_SERVICE_IP = "10.100.192.39"
+
+# while :; do echo
+#     read -p "请输入密码自助平台使用的本机IP: " PWD_SELF_SERVICE_IP
+#     check_ip "${PWD_SELF_SERVICE_IP}"
+#     if [[ $? -ne 0 ]]; then
+#       echo "---输入的IP地址格式有误，请重新输入 ..."
+#     else
+#       break
+#     fi
+# done
 
 while :; do echo
     read -p "请输入密码自助平台使用的端口(不要和Nginx[80]一样): " PWD_SELF_SERVICE_PORT
@@ -135,15 +137,17 @@ while :; do echo
     fi
 done
 
-while :; do echo
-    read -p "请输入密码自助平台使用域名，例如：pwd.abc.com（不需要加http://或https://） " PWD_SELF_SERVICE_DOMAIN
-    check_domain "${PWD_SELF_SERVICE_DOMAIN}"
-    if [[ $? -ne 0 ]]; then
-      echo "---输入的域名格式有误，请重新输入 ..."
-    else
-      break
-    fi
-done
+
+$PWD_SELF_SERVICE_DOMAIN = "aq.oebiotech.com"
+# while :; do echo
+#     read -p "请输入密码自助平台使用域名，例如：pwd.abc.com（不需要加http://或https://） " PWD_SELF_SERVICE_DOMAIN
+#     check_domain "${PWD_SELF_SERVICE_DOMAIN}"
+#     if [[ $? -ne 0 ]]; then
+#       echo "---输入的域名格式有误，请重新输入 ..."
+#     else
+#       break
+#     fi
+# done
 
 echo
 echo "==============================================="
