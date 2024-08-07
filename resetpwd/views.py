@@ -89,7 +89,7 @@ def index(request):
             }
             return render(request, msg_template, context)
         # 得到AD域用户名称
-        _, username = get_name_from_email((AdOps(), username))
+        _, username = get_name_from_email(AdOps(), username)
         logger.error('用户名称%s' % (username))
         # # 格式化用户名
         # _, username = format2username(username)
