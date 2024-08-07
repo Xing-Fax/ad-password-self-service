@@ -162,7 +162,7 @@ class AdOps(object):
                 # user_info = result[0]  
                 # logger.error("测试" + str(user_info))
                 # return True, user_info.get('sAMAccountName')  
-                return True, self.conn.entries[0]['distinguishedName']
+                return True, "123"
             else:  
                 return False, "未找到用户"  
         except Exception as e:  
