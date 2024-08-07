@@ -140,7 +140,7 @@ class AdOps(object):
             self.__conn()
             return True, self.conn.search(BASE_DN, SEARCH_FILTER.format(username), attributes=['sAMAccountName'])
         except IndexError:
-            return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。"
+            return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。1"
         except Exception as e:
             return False, "AdOps Exception: {}".format(e)
         
@@ -180,9 +180,9 @@ class AdOps(object):
                              attributes=['distinguishedName'])
             return True, str(self.conn.entries[0]['distinguishedName'])
         except IndexError:
-            logger.error("AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。")
+            logger.error("AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。2")
             logger.error("self.conn.search(BASE_DN, {}, attributes=['distinguishedName'])".format(SEARCH_FILTER.format(username)))
-            return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。"
+            return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。3"
         except Exception as e:
             logger.error("AdOps Exception: {}".format(e))
             return False, "AdOps Exception: {}".format(e)
@@ -199,10 +199,10 @@ class AdOps(object):
             self.conn.search(BASE_DN, SEARCH_FILTER.format(username), attributes=['userAccountControl'])
             return True, self.conn.entries[0]['userAccountControl']
         except IndexError:
-            logger.error("AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。")
+            logger.error("AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。4")
             logger.error("self.conn.search({}, {}, attributes=['userAccountControl'])".format(BASE_DN, SEARCH_FILTER.format(username)))
             logger.info("self.conn.entries -- {}".format(self.conn.entries))
-            return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。"
+            return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。5"
         except Exception as e:
             logger.error("AdOps Exception: {}".format(e))
             return False, "AdOps Exception: {}".format(e)
@@ -219,7 +219,7 @@ class AdOps(object):
             try:
                 return True, self.conn.extend.microsoft.unlock_account(user='%s' % user_dn)
             except IndexError:
-                return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。"
+                return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。6"
             except Exception as e:
                 logger.error("AdOps Exception: {}".format(e))
                 return False, "AdOps Exception: {}".format(e)
@@ -281,6 +281,6 @@ class AdOps(object):
             else:
                 return False, locked_status
         except IndexError:
-            return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。"
+            return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。7"
         except Exception as e:
             return False, "AdOps Exception: {}".format(e)
