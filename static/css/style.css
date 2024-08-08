@@ -4,18 +4,21 @@ html, body {
 }
 
 body {
-    background-color: #1965DC;
-    color: #1965DC;
     font-family: "Microsoft Yahei", serif;
     background: #fafafa;
     background-image: url("/static/img/main_back.png");
-    background-position: center center; /*将背景图片居中*/
-    background-repeat: no-repeat; /*禁止背景图片平铺*/
-    background-size: cover; /*背景图片铺满整个屏幕*/
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+button{
+    /* background-color: #1965DC; */
+    color: #1965DC;
 }
 
 h1 {
-    font-family: "/static/img/fontzipMin.ttf", 
+    font-family: "/static/font/fontzipMin.ttf", 
 }
 
 a:link {
