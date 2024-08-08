@@ -42,7 +42,7 @@ def get_name_from_email(ad_ops, account):
             return False, NameError("常规错误: {}".format(result))
         return True, result
     except Exception as e:
-        return False, NameError("查询失败, 错误信息[{}]".format(account, e))
+        return False, NameError("查询失败, 错误信息[{}]".format(e))
 
 def format2username(account):
     """

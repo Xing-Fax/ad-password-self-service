@@ -160,6 +160,7 @@ class AdOps(object):
             self.conn.search(BASE_DN, "(mail=" + email + ")", attributes=['sAMAccountName'])
             return True, self.conn.entries[0]['sAMAccountName']
         except Exception as e:  
+            logger.error("self.conn.search(BASE_DN, {}, attributes=['sAMAccountName'])".format(SEARCH_FILTER.format(email)))
             return False, "AdOps Exception: {}".format(e)
         
     @decorator_logger(logger, log_head='AdOps', pretty=True, indent=2, verbose=1)
