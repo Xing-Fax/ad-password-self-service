@@ -74,7 +74,7 @@ def ops_account(ad_ops, request, msg_template, home_url, username, new_password)
                 if unlock_status:
                     context = {
                         'global_title': TITLE,
-                        'msg': "🎉密码己修改成功, 请妥善保管~",
+                        'msg': "🎉密码己修改成功, 请妥善保管, 喵~",
                         'button_click': "window.location.href='%s'" % home_url,
                         'button_display': "返回主页"
                     }
