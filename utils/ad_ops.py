@@ -156,9 +156,13 @@ class AdOps(object):
         :return: tuple(bool, str or None) 
         """
         try:
-            self.__conn()
-            self.conn.search(BASE_DN, "(mail=" + email + ")", attributes=['sAMAccountName'])
-            return True, self.conn.entries[0]['sAMAccountName']
+            # 如果传进来的是用户名称，就不转换
+            if "@" in email:
+                self.__conn()
+                self.conn.search(BASE_DN, "(mail=" + email + ")", attributes=['sAMAccountName'])
+                return True, self.conn.entries[0]['sAMAccountName']
+            else:
+                return True, email
         except Exception as e:  
             logger.error("self.conn.search(BASE_DN, {}, attributes=['sAMAccountName'])".format(SEARCH_FILTER.format(email)))
             return False, "AdOps Exception: {}".format(e)
