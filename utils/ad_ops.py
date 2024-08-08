@@ -107,7 +107,7 @@ class AdOps(object):
             if '52e' in e.message:
                 return False, u'账号或旧密码不正确!'
             elif '775' in e.message:
-                return False, u'账号已锁定, 请自行扫码解锁!'
+                return False, u'账号已锁定, 请自行解锁!'
             elif '533' in e.message:
                 return False, u'账号已禁用!'
             elif '525' in e.message:

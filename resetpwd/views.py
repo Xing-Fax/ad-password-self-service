@@ -107,7 +107,7 @@ def index(request):
             context = {
                 'global_title': TITLE,
                 'msg': str(auth_result),
-                'button_click': "window.location.href='%s'" % '/',
+                'button_click': "window.location.href='%s'" % '/auth',
                 'button_display': "重新认证授权"
             }
             return render(request, msg_template, context)
