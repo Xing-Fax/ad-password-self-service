@@ -58,14 +58,6 @@ class DingDingOps(AppKeyClient):
         """
         _status, user_id = self.get_user_id_by_code(code)
         # 判断 user_id 在本企业钉钉/微信中是否存在
-        if "e=40029" in str(user_id):
-            context = {
-                'global_title': TITLE,
-                'msg': '认证只能请求一次, 请重新获取认证',
-                'button_click': "window.location.href='%s'" % home_url,
-                'button_display': "返回主页"
-            }
-            return False, context, user_id
         if not _status:
             context = {
                 'global_title': TITLE,

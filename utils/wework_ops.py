@@ -161,9 +161,13 @@ class WeWorkOps(AbstractApi):
         _status, ticket_data = self.get_user_ticket_by_code_with_oauth2(code)
         # 判断 user_ticket 是否存在
         if not _status:
+            if "e=40029" in str(ticket_data):
+                msg = '认证只能请求一次, 请重新获取认证'
+            else:
+                msg = '获取userid失败, 错误信息: {}'.format(ticket_data)
             context = {
                 'global_title': TITLE,
-                'msg': '获取userid失败, 错误信息: {}'.format(ticket_data),
+                'msg': msg,
                 'button_click': "window.location.href='%s'" % '/auth',
                 'button_display': "重新认证授权"
             }
