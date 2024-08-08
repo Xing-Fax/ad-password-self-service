@@ -58,7 +58,7 @@ def auth(request):
     if request.method == 'GET':
         return render(request, 'auth.html', locals())
     else:
-        logger.error('[异常]  请求方法：%s，请求路径%s' % (request.method, request.path))
+        logger.error('[异常]  请求方法：%s, 请求路径%s' % (request.method, request.path))
 
 
 @decorator_logger(logger, log_head='Request', pretty=True, indent=2, verbose=1)
@@ -71,7 +71,7 @@ def index(request):
         return render(request, 'index.html', locals())
 
     elif request.method == 'POST':
-        # 对前端提交的数据进行二次验证，防止恶意提交简单密码或篡改账号。
+        # 对前端提交的数据进行二次验证, 防止恶意提交简单密码或篡改账号。
         check_form = CheckForm(request.POST)
         if check_form.is_valid():
             form_obj = check_form.cleaned_data
@@ -80,7 +80,7 @@ def index(request):
             new_password = form_obj.get("new_password")
         else:
             _msg = check_form
-            logger.error('[异常]  请求方法：%s，请求路径：%s，错误信息：%s' % (request.method, request.path, _msg))
+            logger.error('[异常]  请求方法：%s, 请求路径：%s, 错误信息：%s' % (request.method, request.path, _msg))
             context = {
                 'global_title': TITLE,
                 'msg': _msg,
@@ -115,7 +115,7 @@ def index(request):
     else:
         context = {
             'global_title': TITLE,
-            'msg': "不被接受的认证信息，请重新尝试认证授权。",
+            'msg': "不被接受的认证信息, 请重新尝试认证授权~",
             'button_click': "window.location.href='%s'" % '/auth',
             'button_display': "重新认证授权"
         }
@@ -125,7 +125,7 @@ def index(request):
 @decorator_logger(logger, log_head='Request', pretty=True, indent=2, verbose=1)
 def reset_password(request):
     """
-    钉钉扫码并验证信息通过之后，在重置密码页面将用户账号进行绑定
+    钉钉扫码并验证信息通过之后, 在重置密码页面将用户账号进行绑定
     :param request:
     :return:
     """
@@ -133,7 +133,7 @@ def reset_password(request):
     if request.method == 'GET':
         code = request.GET.get('code')
         username = request.GET.get('username')
-        # 如果从GET路径中提取到username、code，并且在缓存中存在username对应的code值，说明已经认证过
+        # 如果从GET路径中提取到username、code, 并且在缓存中存在username对应的code值, 说明已经认证过
         if username and code and cache_storage.get(username) == code:
             context = {
                 'global_title': TITLE,
@@ -141,12 +141,12 @@ def reset_password(request):
                 'code': code,
             }
             return render(request, 'reset_password.html', context)
-        # 否则就是第一次认证，用code换取用户信息
+        # 否则就是第一次认证, 用code换取用户信息
         else:
             if not code:
                 context = {
                     'global_title': TITLE,
-                    'msg': "临时授权码己失效，请尝试重新认证授权...",
+                    'msg': "😭临时授权码己失效, 请尝试重新认证授权~",
                     'button_click': "window.location.href='%s'" % '/auth',
                     'button_display': "重新认证授权"
                 }
@@ -160,13 +160,13 @@ def reset_password(request):
                 if not _:
                     context = {
                         'global_title': TITLE,
-                        'msg': '当前扫码的用户未激活或可能己离职，用户信息如下：%s' % user_info,
+                        'msg': '🥹当前扫码的用户未激活或可能己离职, 用户信息如下：%s' % user_info,
                         'button_click': "window.location.href='%s'" % home_url,
                         'button_display': "返回主页"
                     }
                     return render(request, msg_template, context)
 
-                # 通过user_info拿到用户邮箱，并格式化为username
+                # 通过user_info拿到用户邮箱, 并格式化为username
                 _, email = get_email_from_userinfo(user_info)
                 if not _:
                     context = {
@@ -198,7 +198,7 @@ def reset_password(request):
                 else:
                     context = {
                         'global_title': TITLE,
-                        'msg': "{}，您好，企业{}中未能找到您账号的邮箱配置，请联系HR完善信息。".format(
+                        'msg': "{}, 您好, 企业{}中未能找到您账号的邮箱配置, 请联系HR完善信息~".format(
                             user_info.get('name'), scan_params.AUTH_APP),
                         'button_click': "window.location.href='%s'" % '/auth',
                         'button_display': "重新认证授权"
@@ -208,14 +208,14 @@ def reset_password(request):
             except Exception as callback_e:
                 context = {
                     'global_title': TITLE,
-                    'msg': "错误[%s]，请与管理员联系." % str(callback_e),
+                    'msg': "错误[%s], 请与管理员联系." % str(callback_e),
                     'button_click': "window.location.href='%s'" % home_url,
                     'button_display': "返回主页"
                 }
                 logger.error('[异常] ：%s' % str(callback_e))
                 return render(request, msg_template, context)
 
-    # 重置密码页面，输入新密码后点击提交
+    # 重置密码页面, 输入新密码后点击提交
     elif request.method == 'POST':
         username = request.POST.get('username')
         code = request.POST.get('code')
@@ -227,7 +227,7 @@ def reset_password(request):
             except Exception as reset_e:
                 context = {
                     'global_title': TITLE,
-                    'msg': "错误[%s]，请与管理员联系." % str(reset_e),
+                    'msg': "错误[%s], 请与管理员联系." % str(reset_e),
                     'button_click': "window.location.href='%s'" % home_url,
                     'button_display': "返回主页"
                 }
@@ -236,7 +236,7 @@ def reset_password(request):
         else:
             context = {
                 'global_title': TITLE,
-                'msg': "认证已经失效，可尝试从重新认证授权。",
+                'msg': "认证已经失效, 可尝试从重新认证授权~",
                 'button_click': "window.location.href='%s'" % '/auth',
                 'button_display': "重新认证授权"
             }
@@ -265,7 +265,7 @@ def unlock_account(request):
         else:
             context = {
                 'global_title': TITLE,
-                'msg': "{}，您好，当前会话可能已经过期，请再试一次吧。".format(username),
+                'msg': "{}, 您好, 当前会话可能已经过期, 请再试一次叭~".format(username),
                 'button_click': "window.location.href='%s'" % '/auth',
                 'button_display': "重新认证授权"
             }
@@ -280,7 +280,7 @@ def unlock_account(request):
             except Exception as reset_e:
                 context = {
                     'global_title': TITLE,
-                    'msg': "错误[%s]，请与管理员联系." % str(reset_e),
+                    'msg': "错误[%s], 请与管理员联系~" % str(reset_e),
                     'button_click': "window.location.href='%s'" % home_url,
                     'button_display': "返回主页"
                 }
@@ -289,7 +289,7 @@ def unlock_account(request):
         else:
             context = {
                 'global_title': TITLE,
-                'msg': "认证已经失效，请尝试从重新进行认证授权。",
+                'msg': "认证已经失效, 请尝试从重新进行认证授权~",
                 'button_click': "window.location.href='%s'" % '/auth',
                 'button_display': "重新认证授权"
             }

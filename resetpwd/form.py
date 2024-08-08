@@ -14,9 +14,9 @@ class CheckForm(c_forms.Form):
                         'min_length': "密码长度不能小于8个字符",
                         'max_length': "密码长度不能大于30个字符"}
     )
-    old_password = c_fields.CharField(error_messages={'required': '确认密码不能为空'})
-    ensure_password = c_fields.CharField(error_messages={'required': '确认密码不能为空'})
-    username = c_fields.CharField(error_messages={'required': '账号不能为空', 'invalid': '账号格式错误'})
+    old_password = c_fields.CharField(error_messages={'required': '确认密码不能为空(ﾟДﾟ*)ﾉ'})
+    ensure_password = c_fields.CharField(error_messages={'required': '确认密码不能为空(ﾟДﾟ*)ﾉ'})
+    username = c_fields.CharField(error_messages={'required': '账号不能为空(ﾟДﾟ*)ﾉ', 'invalid': '账号格式错误(。>︿<)_θ'})
 
     def clean(self):
         pwd0 = self.cleaned_data.get('old_password')
@@ -27,7 +27,7 @@ class CheckForm(c_forms.Form):
         elif pwd0 == pwd1:
             # 这里异常模块导入要放在函数里面，放到文件开头有时会报错，找不到
             from django.core.exceptions import ValidationError
-            raise ValidationError('新旧密码不能一样')
+            raise ValidationError('新旧密码不能一样🥹')
         else:
             from django.core.exceptions import ValidationError
-            raise ValidationError('新密码和确认密码输入不一致')
+            raise ValidationError('新密码和确认密码输入不一致🥹')
