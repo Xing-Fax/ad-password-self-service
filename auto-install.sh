@@ -127,17 +127,17 @@ PWD_SELF_SERVICE_IP="10.100.192.39"
 #     fi
 # done
 
-# PWD_SELF_SERVICE_PORT="37096"
+PWD_SELF_SERVICE_PORT="37096"
 
-while :; do echo
-    read -p "请输入密码自助平台使用的端口(不要和Nginx[80]一样): " PWD_SELF_SERVICE_PORT
-    check_port "${PWD_SELF_SERVICE_PORT}"
-    if [[ $? -ne 0 ]]; then
-      echo "---输入的端口有误, 请重新输入 ..."
-    else
-      break
-    fi
-done
+# while :; do echo
+#     read -p "请输入密码自助平台使用的端口(不要和Nginx[80]一样): " PWD_SELF_SERVICE_PORT
+#     check_port "${PWD_SELF_SERVICE_PORT}"
+#     if [[ $? -ne 0 ]]; then
+#       echo "---输入的端口有误, 请重新输入 ..."
+#     else
+#       break
+#     fi
+# done
 
 
 PWD_SELF_SERVICE_DOMAIN="aq.oebiotech.com"
