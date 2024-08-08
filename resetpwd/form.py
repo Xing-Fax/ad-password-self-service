@@ -4,13 +4,13 @@ from django import forms as c_forms
 
 class CheckForm(c_forms.Form):
     new_password = c_fields.RegexField(
-        '(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,30}',
+        '(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}',
         # 密码必须同时包含大写、小写、数字和特殊字符其中三项且至少8位
         strip=True,
         min_length=8,
         max_length=30,
         error_messages={'required': '新密码不能为空.',
-                        'invalid': '密码必须包含数字, 字母、特殊字符',
+                        'invalid': '密码必须包含数字, 字母、或特殊字符',
                         'min_length': "密码长度不能小于8个字符",
                         'max_length': "密码长度不能大于30个字符"}
     )
