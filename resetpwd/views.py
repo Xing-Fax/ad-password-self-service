@@ -165,7 +165,6 @@ def reset_password(request):
                         'button_display': "返回主页"
                     }
                     return render(request, msg_template, context)
-
                 # 通过user_info拿到用户邮箱, 并格式化为username
                 _, email = get_email_from_userinfo(user_info)
                 if not _:
