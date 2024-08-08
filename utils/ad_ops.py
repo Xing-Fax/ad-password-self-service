@@ -140,7 +140,7 @@ class AdOps(object):
             self.__conn()
             return True, self.conn.search(BASE_DN, SEARCH_FILTER.format(username), attributes=['sAMAccountName'])
         except IndexError:
-            return False, "🥹错误: 在查询用户是否在域中, 未检索到任何信息, 请与联系IT部门处理!"
+            return False, "在查询用户是否在域中, 未检索到任何信息, 请与联系IT部门处理!"
         except Exception as e:
             return False, "😱非预期错误: {}".format(e)
         
@@ -182,7 +182,7 @@ class AdOps(object):
         except IndexError:
             logger.error("AdOps Exception: Connect.search未能检索到任何信息, 当前账号可能被排除在<SEARCH_FILTER>之外, 请联系管理员处理2")
             logger.error("self.conn.search(BASE_DN, {}, attributes=['distinguishedName'])".format(SEARCH_FILTER.format(username)))
-            return False, "🥹错误: 在查询用户完整DN时, 未检索到任何信息, 请与联系IT部门处理!"
+            return False, "在查询用户完整DN时, 未检索到任何信息, 请与联系IT部门处理!"
         except Exception as e:
             logger.error("AdOps Exception: {}".format(e))
             return False, "😱非预期错误: {}".format(e)
@@ -202,7 +202,7 @@ class AdOps(object):
             logger.error("AdOps Exception: Connect.search未能检索到任何信息, 当前账号可能被排除在<SEARCH_FILTER>之外, 请联系管理员处理4")
             logger.error("self.conn.search({}, {}, attributes=['userAccountControl'])".format(BASE_DN, SEARCH_FILTER.format(username)))
             logger.info("self.conn.entries -- {}".format(self.conn.entries))
-            return False, "🥹错误: 在查询用户账号状态时, 未检索到任何信息, 请与联系IT部门处理!"
+            return False, "在查询用户账号状态时, 未检索到任何信息, 请与联系IT部门处理!"
         except Exception as e:
             logger.error("AdOps Exception: {}".format(e))
             return False, "😱非预期错误: {}".format(e)
@@ -219,7 +219,7 @@ class AdOps(object):
             try:
                 return True, self.conn.extend.microsoft.unlock_account(user='%s' % user_dn)
             except IndexError:
-                return False, "🥹错误: 在解锁用户时, 未检索到任何信息, 请与联系IT部门处理!"
+                return False, "在解锁用户时, 未检索到任何信息, 请与联系IT部门处理!"
             except Exception as e:
                 logger.error("AdOps Exception: {}".format(e))
                 return False, "😱非预期错误: {}".format(e)
@@ -282,6 +282,6 @@ class AdOps(object):
                 return False, locked_status
         except IndexError:
             # return False, "AdOps Exception: Connect.search未能检索到任何信息, 当前账号可能被排除在<SEARCH_FILTER>之外, 请联系管理员处理7"
-            return False, "🥹错误: 在检查用户账号是否被锁定时, 未检索到任何信息, 请与联系IT部门处理!"
+            return False, "在检查用户账号是否被锁定时, 未检索到任何信息, 请与联系IT部门处理!"
         except Exception as e:
             return False, "😱非预期错误: {}".format(e)
