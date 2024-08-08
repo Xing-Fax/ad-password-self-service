@@ -23,7 +23,7 @@ function get_os_basic_info() {
             exit 1
         fi
     else
-        echo "不能识别的操作系统，请选择使用Ubuntu或Centos! ..."
+        echo "不能识别的操作系统, 请选择使用Ubuntu或Centos! ..."
         exit 1
     fi
 }
@@ -86,29 +86,29 @@ function safe_installer() {
 check_status() {
     local status=$1
     if [[ ${status} -ne 0 ]]; then
-        echo "出现错误，请检查后再试 ..."
+        echo "出现错误, 请检查后再试 ..."
         exit 1
     fi
 }
 
 get_os_basic_info
 echo "============================================================================="
-echo "  此脚本为快速部署，支持[Ubuntu, Debian, Centos]
+echo "  此脚本为快速部署, 支持[Ubuntu, Debian, Centos]
   请准备一个新的环境运行,本脚本会快速安装相关的环境和所需要的服务
-  如果你运行脚本的服务器中已经存在如：Nginx、Python3等，可能会破坏掉原有的应用配置"
+  如果你运行脚本的服务器中已经存在如：Nginx、Python3等, 可能会破坏掉原有的应用配置"
 echo "  当前目录：${CWD}"
 echo "  操作系统发行版本：${os_distro}, 系统版本：${os_version} ..."
 echo "============================================================================="
 
-while :; do echo
-    echo "请确认你此台服务器是全新干净的，以防此脚本相关操作对正在运行的服务造成影响（不可逆） ..."
-    read -p "请确认是否继续执行，输入 [y/n]: " ensure_yn
-    if [[ ! "${ensure_yn}" =~ ^[y,n]$ ]]; then
-      echo "输入有误，请输入 y 或 n ..."
-    else
-      break
-    fi
-done
+# while :; do echo
+#     echo "请确认你此台服务器是全新干净的, 以防此脚本相关操作对正在运行的服务造成影响（不可逆） ..."
+#     read -p "请确认是否继续执行, 输入 [y/n]: " ensure_yn
+#     if [[ ! "${ensure_yn}" =~ ^[y,n]$ ]]; then
+#       echo "输入有误, 请输入 y 或 n ..."
+#     else
+#       break
+#     fi
+# done
 
 # if [[ "${ensure_yn}" = n ]]; then
 #     exit 0
@@ -121,29 +121,31 @@ PWD_SELF_SERVICE_IP="10.100.192.39"
 #     read -p "请输入密码自助平台使用的本机IP: " PWD_SELF_SERVICE_IP
 #     check_ip "${PWD_SELF_SERVICE_IP}"
 #     if [[ $? -ne 0 ]]; then
-#       echo "---输入的IP地址格式有误，请重新输入 ..."
+#       echo "---输入的IP地址格式有误, 请重新输入 ..."
 #     else
 #       break
 #     fi
 # done
 
-while :; do echo
-    read -p "请输入密码自助平台使用的端口(不要和Nginx[80]一样): " PWD_SELF_SERVICE_PORT
-    check_port "${PWD_SELF_SERVICE_PORT}"
-    if [[ $? -ne 0 ]]; then
-      echo "---输入的端口有误，请重新输入 ..."
-    else
-      break
-    fi
-done
+PWD_SELF_SERVICE_PORT="37096"
+
+# while :; do echo
+#     read -p "请输入密码自助平台使用的端口(不要和Nginx[80]一样): " PWD_SELF_SERVICE_PORT
+#     check_port "${PWD_SELF_SERVICE_PORT}"
+#     if [[ $? -ne 0 ]]; then
+#       echo "---输入的端口有误, 请重新输入 ..."
+#     else
+#       break
+#     fi
+# done
 
 
 PWD_SELF_SERVICE_DOMAIN="aq.oebiotech.com"
 # while :; do echo
-#     read -p "请输入密码自助平台使用域名，例如：pwd.abc.com（不需要加http://或https://） " PWD_SELF_SERVICE_DOMAIN
+#     read -p "请输入密码自助平台使用域名, 例如：pwd.abc.com（不需要加http://或https://） " PWD_SELF_SERVICE_DOMAIN
 #     check_domain "${PWD_SELF_SERVICE_DOMAIN}"
 #     if [[ $? -ne 0 ]]; then
-#       echo "---输入的域名格式有误，请重新输入 ..."
+#       echo "---输入的域名格式有误, 请重新输入 ..."
 #     else
 #       break
 #     fi
@@ -154,7 +156,7 @@ echo "==============================================="
 echo "开始部署 ..."
 
 if [[ ! -f "${CWD}/.status/.init_repo.Done" ]]; then
-    echo "处理源配置，改成国内源 ..."
+    echo "处理源配置, 改成国内源 ..."
     if [[ ${os_distro} =~ (CentOS|Centos) ]]; then
         if [[ ${os_version_prefix} -lt 9 ]];then
             sudo cp -a /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.$(date '+%Y%m%d%H%M%S')
@@ -223,7 +225,7 @@ if [[ ! -f "${CWD}/.status/.redis.Done" ]]; then
         echo "${gen_password}" >${CWD}/.status/.redis.Done
         echo "安装 redis-server 成功"
     else
-        echo "安装 redis-server 失败，请重新运行本脚本再试"
+        echo "安装 redis-server 失败, 请重新运行本脚本再试"
     fi
 else
     gen_password=$(cat ${CWD}/.status/.redis.Done)
@@ -237,7 +239,7 @@ elif [[ -f /usr/lib/systemd/system/redis-server.service ]]; then
 fi
 
 if [[ -z ${redis_service} ]]; then
-    echo "Redis服务名未能识别到，请自行手动重启本机的Redis服务 ..."
+    echo "Redis服务名未能识别到, 请自行手动重启本机的Redis服务 ..."
 else
     rm -f /etc/nginx/conf.d/default.conf
     rm -f /etc/nginx/sites-enabled/default.conf
@@ -301,7 +303,7 @@ PYTHON_INSTALL_DIR=/usr/share/python-${PYTHON_VER}
 PYTHON_VENV_DIR=${CWD}/pwd_venv
 
 if [[ -f "${CWD}/.status/.python3.Done" ]];then
-    echo "Python3己部署，跳过 ..."
+    echo "Python3己部署, 跳过 ..."
 else
     if [[ -f "${CWD}/Python-${PYTHON_VER}.tar.xz" ]] && [[ -f "${CWD}/python.${PYTHON_VER}.md5" ]]; then
         python3_md5=$(md5sum "${CWD}/Python-${PYTHON_VER}.tar.xz" |awk '{print $1}')
@@ -311,14 +313,14 @@ else
             rm -f "${CWD}/python.${PYTHON_VER}.md5"
         fi
     else
-        echo "无Python${PYTHON_VER}.tar.xz，执行下载python ${PYTHON_VER} ..."
+        echo "无Python${PYTHON_VER}.tar.xz, 执行下载python ${PYTHON_VER} ..."
         rm -f "${CWD}/Python-${PYTHON_VER}.tar.xz"
 
         sudo wget -c -t 10 -T 120 https://repo.huaweicloud.com/python/${PYTHON_VER}/Python-${PYTHON_VER}.tar.xz -O ${CWD}/Python-${PYTHON_VER}.tar.xz
 
         md5sum "${CWD}/Python-${PYTHON_VER}.tar.xz" |awk '{print $1}' > ${CWD}/python.${PYTHON_VER}.md5
         if [[ $? -ne 0 ]]; then
-            echo "下载${PYTHON_VER}/Python-${PYTHON_VER}.tar.xz失败，请重新运行本脚本再次重试 ..."
+            echo "下载${PYTHON_VER}/Python-${PYTHON_VER}.tar.xz失败, 请重新运行本脚本再次重试 ..."
             exit 1
         fi
     fi
@@ -334,7 +336,7 @@ else
       touch ${CWD}/.status/.python3.Done
       echo "Python3 安装成功 ..."
     else
-      echo "Python3 安装失败，请重试 ..."
+      echo "Python3 安装失败, 请重试 ..."
       exit 1
     fi
 fi
@@ -416,14 +418,16 @@ systemctl start uwsgiserver
 echo
 echo
 echo "密码自助服务平台的访问地址是：http://${PWD_SELF_SERVICE_DOMAIN}或http://${PWD_SELF_SERVICE_IP} ..."
-echo "请确保以上域名能正常解析，否则使用域名无法访问 ..."
-echo "如果本机防火墙是开启状态，请自行放行端口: [80, ${PWD_SELF_SERVICE_PORT}]"
+echo "请确保以上域名能正常解析, 否则使用域名无法访问 ..."
+echo "如果本机防火墙是开启状态, 请自行放行端口: [80, ${PWD_SELF_SERVICE_PORT}]"
 echo
 echo "Uwsgi启动：/etc/init.d/uwsgiserver start ..."
 echo "Uwsgi停止：/etc/init.d/uwsgiserver stop ..."
 echo "Uwsgi重启：/etc/init.d/uwsgiserver restart ..."
 echo
-echo "Redis Server密码是：${gen_password}，可在${REDIS_CONF}中查到 ..."
+echo "Redis Server密码是：${gen_password}, 可在${REDIS_CONF}中查到 ..."
 echo
 echo "文件${CWD}/conf/local_setting.py中配置参数请自行确认下是否完整 ..."
 echo
+
+/etc/init.d/uwsgiserver restart
