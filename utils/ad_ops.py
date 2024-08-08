@@ -251,7 +251,7 @@ class AdOps(object):
 
             # change successful, returns True
             if result['result'] == RESULT_SUCCESS:
-                return True, '🎉密码己修改成功, 请妥善保管!'
+                return True, '🎉密码己修改成功, 请妥善保管, 喵~'
 
             # change was not successful, raises exception if raise_exception = True in connection or returns the operation result, error code is in result['result']
             if self.conn.raise_exceptions:
