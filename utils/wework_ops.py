@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @FileName：     WEWORK_ops.py
+# @FileName:      WEWORK_ops.py
 # @Software:      
 # @Author:         Leven Xiang
 # @Mail:           xiangle0109@outlook.com
-# @Date：          2021/5/18 16:55
+# @Date:           2021/5/18 16:55
 from __future__ import absolute_import, unicode_literals
 
 import os
@@ -163,7 +163,7 @@ class WeWorkOps(AbstractApi):
         if not _status:
             context = {
                 'global_title': TITLE,
-                'msg': '获取userid失败，错误信息：{}'.format(ticket_data),
+                'msg': '获取userid失败, 错误信息: {}'.format(ticket_data),
                 'button_click': "window.location.href='%s'" % '/auth',
                 'button_display': "重新认证授权"
             }
@@ -173,7 +173,7 @@ class WeWorkOps(AbstractApi):
         if ticket_data.get('user_ticket') is None:
             context = {
                 'global_title': TITLE,
-                'msg': '获取用户Ticket失败，当前扫码用户[{}]可能未加入企业！'.format(user_id),
+                'msg': '获取用户Ticket失败, 当前扫码用户[{}]可能未加入企业!'.format(user_id),
                 'button_click': "window.location.href='%s'" % home_url,
                 'button_display': "返回修改密码"
             }
@@ -185,7 +185,7 @@ class WeWorkOps(AbstractApi):
         if not detail_status:
             context = {
                 'global_title': TITLE,
-                'msg': '获取用户信息失败，错误信息：{}'.format(user_id),
+                'msg': '获取用户信息失败, 错误信息: {}'.format(user_id),
                 'button_click': "window.location.href='%s'" % '/auth',
                 'button_display': "重新认证授权"
             }

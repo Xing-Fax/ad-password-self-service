@@ -69,7 +69,7 @@ def ops_account(ad_ops, request, msg_template, home_url, username, new_password)
         if new_password:
             reset_status, result = ad_ops.ad_reset_user_pwd_by_account(username=username, new_password=new_password)
             if reset_status:
-                # 重置密码并执行一次解锁, 防止重置后账号还是锁定状态。
+                # 重置密码并执行一次解锁, 防止重置后账号还是锁定状态
                 unlock_status, result = ad_ops.ad_unlock_user_by_account(username)
                 if unlock_status:
                     context = {

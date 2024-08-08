@@ -95,9 +95,9 @@ get_os_basic_info
 echo "============================================================================="
 echo "  此脚本为快速部署, 支持[Ubuntu, Debian, Centos]
   请准备一个新的环境运行,本脚本会快速安装相关的环境和所需要的服务
-  如果你运行脚本的服务器中已经存在如：Nginx、Python3等, 可能会破坏掉原有的应用配置"
-echo "  当前目录：${CWD}"
-echo "  操作系统发行版本：${os_distro}, 系统版本：${os_version} ..."
+  如果你运行脚本的服务器中已经存在如: Nginx、Python3等, 可能会破坏掉原有的应用配置"
+echo "  当前目录: ${CWD}"
+echo "  操作系统发行版本: ${os_distro}, 系统版本: ${os_version} ..."
 echo "============================================================================="
 
 # while :; do echo
@@ -142,7 +142,7 @@ done
 
 PWD_SELF_SERVICE_DOMAIN="aq.oebiotech.com"
 # while :; do echo
-#     read -p "请输入密码自助平台使用域名, 例如：pwd.abc.com（不需要加http://或https://） " PWD_SELF_SERVICE_DOMAIN
+#     read -p "请输入密码自助平台使用域名, 例如: pwd.abc.com（不需要加http://或https://） " PWD_SELF_SERVICE_DOMAIN
 #     check_domain "${PWD_SELF_SERVICE_DOMAIN}"
 #     if [[ $? -ne 0 ]]; then
 #       echo "---输入的域名格式有误, 请重新输入 ..."
@@ -417,15 +417,15 @@ systemctl start uwsgiserver
 
 echo
 echo
-echo "密码自助服务平台的访问地址是：http://${PWD_SELF_SERVICE_DOMAIN}或http://${PWD_SELF_SERVICE_IP} ..."
+echo "密码自助服务平台的访问地址是: http://${PWD_SELF_SERVICE_DOMAIN}或http://${PWD_SELF_SERVICE_IP} ..."
 echo "请确保以上域名能正常解析, 否则使用域名无法访问 ..."
 echo "如果本机防火墙是开启状态, 请自行放行端口: [80, ${PWD_SELF_SERVICE_PORT}]"
 echo
-echo "Uwsgi启动：/etc/init.d/uwsgiserver start ..."
-echo "Uwsgi停止：/etc/init.d/uwsgiserver stop ..."
-echo "Uwsgi重启：/etc/init.d/uwsgiserver restart ..."
+echo "Uwsgi启动: /etc/init.d/uwsgiserver start ..."
+echo "Uwsgi停止: /etc/init.d/uwsgiserver stop ..."
+echo "Uwsgi重启: /etc/init.d/uwsgiserver restart ..."
 echo
-echo "Redis Server密码是：${gen_password}, 可在${REDIS_CONF}中查到 ..."
+echo "Redis Server密码是: ${gen_password}, 可在${REDIS_CONF}中查到 ..."
 echo
 echo "文件${CWD}/conf/local_setting.py中配置参数请自行确认下是否完整 ..."
 echo

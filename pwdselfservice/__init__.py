@@ -13,10 +13,10 @@ try:
     cache_storage.set('test_redis_connection', str(datetime.datetime))
     cache_storage.get('test_redis_connection')
     cache_storage.delete('test_redis_connection')
-    logger.info("Redis连接成功，set/get/delete测试通过...")
+    logger.info("Redis连接成功, set/get/delete测试通过...")
 except Exception as e:
     cache_storage = None
-    logger.error("Redis无法连接，请排查Redis配置...")
+    logger.error("Redis无法连接, 请排查Redis配置...")
     logger.error("{}".format(traceback.format_exc()))
     sys.exit(1)
 

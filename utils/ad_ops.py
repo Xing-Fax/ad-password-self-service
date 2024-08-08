@@ -16,26 +16,26 @@ else:
 logger = logging.getLogger(__name__)
 
 """
-根据以下网站的说明：
+根据以下网站的说明: 
 https://docs.microsoft.com/zh-cn/troubleshoot/windows/win32/change-windows-active-directory-user-password
-密码存储在 unicodePwd 属性中的用户对象的 AD 和 LDS 数据库中。 此属性可以在受限条件下写入，但无法读取。 只能修改属性;无法在对象创建时或由搜索查询时添加它。
-为了修改此属性，客户端必须具有到服务器的 128 位传输层安全性 (TLS) /Secure Socket Layer (SSL) 连接。 
-使用 SSP 创建的会话密钥（使用 NTLM 或 Kerberos）的加密会话也可接受，只要达到最小密钥长度。
-若要使用 TLS/SSL 实现此连接：
-    服务器必须拥有 128 位 RSA 连接的服务器证书。
-    客户端必须信任生成服务器证书 (CA) 证书颁发机构。
-    客户端和服务器都必须能够进行 128 位加密。
+密码存储在 unicodePwd 属性中的用户对象的 AD 和 LDS 数据库中 此属性可以在受限条件下写入, 但无法读取 只能修改属性;无法在对象创建时或由搜索查询时添加它
+为了修改此属性, 客户端必须具有到服务器的 128 位传输层安全性 (TLS) /Secure Socket Layer (SSL) 连接 
+使用 SSP 创建的会话密钥（使用 NTLM 或 Kerberos）的加密会话也可接受, 只要达到最小密钥长度
+若要使用 TLS/SSL 实现此连接: 
+    服务器必须拥有 128 位 RSA 连接的服务器证书
+    客户端必须信任生成服务器证书 (CA) 证书颁发机构
+    客户端和服务器都必须能够进行 128 位加密
     
-unicodePwd 属性的语法为 octet-string;但是，目录服务预期八进制字符串将包含 UNICODE 字符串 (，因为属性的名称指示) 。 
-这意味着在 LDAP 中传递的此属性的任何值都必须是 BER 编码的 UNICODE 字符串 (基本编码规则) 八进制字符串。 
-此外，UNICODE 字符串必须以引号开头和结尾，这些引号不是所需密码的一部分。
+unicodePwd 属性的语法为 octet-string;但是, 目录服务预期八进制字符串将包含 UNICODE 字符串 (, 因为属性的名称指示)  
+这意味着在 LDAP 中传递的此属性的任何值都必须是 BER 编码的 UNICODE 字符串 (基本编码规则) 八进制字符串 
+此外, UNICODE 字符串必须以引号开头和结尾, 这些引号不是所需密码的一部分
 
-可通过两种方法修改 unicodePwd 属性。 第一种操作类似于正常的 用户更改密码 操作。 
-在这种情况下，修改请求必须同时包含删除和添加操作。 删除操作必须包含当前密码，并包含其周围的引号。 
-添加操作必须包含所需的新密码，其周围必须有引号。
+可通过两种方法修改 unicodePwd 属性 第一种操作类似于正常的 用户更改密码 操作 
+在这种情况下, 修改请求必须同时包含删除和添加操作 删除操作必须包含当前密码, 并包含其周围的引号 
+添加操作必须包含所需的新密码, 其周围必须有引号
 
-修改此属性的第二种方法类似于管理员重置用户密码。 为此，客户端必须以具有修改其他用户密码的足够权限的用户进行绑定。 
-此修改请求应包含单个替换操作，其中包含用引号括起的新所需密码。 如果客户端具有足够的权限，则无论旧密码是什么，此密码都将变为新密码。
+修改此属性的第二种方法类似于管理员重置用户密码 为此, 客户端必须以具有修改其他用户密码的足够权限的用户进行绑定 
+此修改请求应包含单个替换操作, 其中包含用引号括起的新所需密码 如果客户端具有足够的权限, 则无论旧密码是什么, 此密码都将变为新密码
 """
 
 
@@ -51,7 +51,7 @@ class AdOps(object):
         """
         self.use_ssl = use_ssl
         self.port = port
-        # 如果doamin\\user中doamin部分被写成域名格式， 只提取DOMAIN部分
+        # 如果doamin\\user中doamin部分被写成域名格式,  只提取DOMAIN部分
         self.domain = domain.split('.')[0] if domain is not None else None
         self.user = user
         self.password = password
@@ -102,33 +102,33 @@ class AdOps(object):
             c_auth = Connection(server=self.server, user=r'{}\{}'.format(self.domain, username), password=password,
                                 auto_bind=True, raise_exceptions=True)
             c_auth.unbind()
-            return True, '旧密码验证通过。'
+            return True, '旧密码验证通过'
         except LDAPInvalidCredentialsResult as e:
             if '52e' in e.message:
-                return False, u'账号或旧密码不正确！'
+                return False, u'账号或旧密码不正确!'
             elif '775' in e.message:
-                return False, u'账号已锁定，请自行扫码解锁！'
+                return False, u'账号已锁定, 请自行扫码解锁!'
             elif '533' in e.message:
-                return False, u'账号已禁用！'
+                return False, u'账号已禁用!'
             elif '525' in e.message:
-                return False, u'账号不存在！'
+                return False, u'账号不存在!'
             elif '532' in e.message:
-                return False, u'密码己过期！'
+                return False, u'密码己过期!'
             elif '701' in e.message:
-                return False, u'账号己过期！'
+                return False, u'账号己过期!'
             elif '773' in e.message:
-                # 如果仅仅使用普通凭据来绑定ldap用途，请返回False, 让用户通过其他途径修改密码后再来验证登陆
-                # return False, '用户登陆前必须修改密码！'
-                # 设置该账号下次登陆不需要更改密码，再验证一次
+                # 如果仅仅使用普通凭据来绑定ldap用途, 请返回False, 让用户通过其他途径修改密码后再来验证登陆
+                # return False, '用户登陆前必须修改密码!'
+                # 设置该账号下次登陆不需要更改密码, 再验证一次
                 self.__conn()
                 self.conn.search(search_base=BASE_DN, search_filter=SEARCH_FILTER.format(username),
                                  attributes=['pwdLastSet'])
                 self.conn.modify(self.conn.entries[0].entry_dn, {'pwdLastSet': [(MODIFY_REPLACE, ['-1'])]})
                 return True, self.ad_auth_user(username, password)
             else:
-                return False, u'旧密码认证失败，请确认账号的旧密码是否正确或使用重置密码功能。'
+                return False, u'旧密码认证失败, 请确认账号的旧密码是否正确或使用重置密码功能'
         except LDAPException as e:
-            return False, "连接Ldap失败，报错如下：{}".format(e)
+            return False, "连接Ldap失败, 报错如下: {}".format(e)
 
     def ad_ensure_user_by_account(self, username):
         """
@@ -156,7 +156,7 @@ class AdOps(object):
         :return: tuple(bool, str or None) 
         """
         try:
-            # 如果传进来的不是邮箱，就不转换
+            # 如果传进来的不是邮箱, 就不转换
             if "@" in email:
                 self.__conn()
                 self.conn.search(BASE_DN, "(mail=" + email + ")", attributes=['sAMAccountName'])
@@ -180,7 +180,7 @@ class AdOps(object):
                              attributes=['distinguishedName'])
             return True, str(self.conn.entries[0]['distinguishedName'])
         except IndexError:
-            logger.error("AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。2")
+            logger.error("AdOps Exception: Connect.search未能检索到任何信息, 当前账号可能被排除在<SEARCH_FILTER>之外, 请联系管理员处理2")
             logger.error("self.conn.search(BASE_DN, {}, attributes=['distinguishedName'])".format(SEARCH_FILTER.format(username)))
             return False, "🥹错误: 在查询用户完整DN时, 未检索到任何信息, 请与联系IT部门处理!"
         except Exception as e:
@@ -199,7 +199,7 @@ class AdOps(object):
             self.conn.search(BASE_DN, SEARCH_FILTER.format(username), attributes=['userAccountControl'])
             return True, self.conn.entries[0]['userAccountControl']
         except IndexError:
-            logger.error("AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。4")
+            logger.error("AdOps Exception: Connect.search未能检索到任何信息, 当前账号可能被排除在<SEARCH_FILTER>之外, 请联系管理员处理4")
             logger.error("self.conn.search({}, {}, attributes=['userAccountControl'])".format(BASE_DN, SEARCH_FILTER.format(username)))
             logger.info("self.conn.entries -- {}".format(self.conn.entries))
             return False, "🥹错误: 在查询用户账号状态时, 未检索到任何信息, 请与联系IT部门处理!"
@@ -269,7 +269,7 @@ class AdOps(object):
         """
         通过username获取某个用户账号是否被锁定
         :param username:
-        :return: 如果结果是1601-01-01说明账号未锁定，返回0
+        :return: 如果结果是1601-01-01说明账号未锁定, 返回0
         """
         try:
             self.__conn()
@@ -281,7 +281,7 @@ class AdOps(object):
             else:
                 return False, locked_status
         except IndexError:
-            # return False, "AdOps Exception: Connect.search未能检索到任何信息，当前账号可能被排除在<SEARCH_FILTER>之外，请联系管理员处理。7"
+            # return False, "AdOps Exception: Connect.search未能检索到任何信息, 当前账号可能被排除在<SEARCH_FILTER>之外, 请联系管理员处理7"
             return False, "🥹错误: 在检查用户账号是否被锁定时, 未检索到任何信息, 请与联系IT部门处理!"
         except Exception as e:
             return False, "😱非预期错误: {}".format(e)

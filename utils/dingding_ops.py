@@ -61,7 +61,7 @@ class DingDingOps(AppKeyClient):
         if not _status:
             context = {
                 'global_title': TITLE,
-                'msg': '获取userid失败，错误信息：{}'.format(user_id),
+                'msg': '获取userid失败, 错误信息: {}'.format(user_id),
                 'button_click': "window.location.href='%s'" % home_url,
                 'button_display': "返回主页"
             }
@@ -70,7 +70,7 @@ class DingDingOps(AppKeyClient):
         if not detail_status:
             context = {
                 'global_title': TITLE,
-                'msg': '获取用户信息失败，错误信息：{}'.format(user_info),
+                'msg': '获取用户信息失败, 错误信息: {}'.format(user_info),
                 'button_click': "window.location.href='%s'" % home_url,
                 'button_display': "返回主页"
             }

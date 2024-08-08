@@ -58,7 +58,7 @@ def auth(request):
     if request.method == 'GET':
         return render(request, 'auth.html', locals())
     else:
-        logger.error('[异常]  请求方法：%s, 请求路径%s' % (request.method, request.path))
+        logger.error('[异常]  请求方法: %s, 请求路径%s' % (request.method, request.path))
 
 
 @decorator_logger(logger, log_head='Request', pretty=True, indent=2, verbose=1)
@@ -71,7 +71,7 @@ def index(request):
         return render(request, 'index.html', locals())
 
     elif request.method == 'POST':
-        # 对前端提交的数据进行二次验证, 防止恶意提交简单密码或篡改账号。
+        # 对前端提交的数据进行二次验证, 防止恶意提交简单密码或篡改账号
         check_form = CheckForm(request.POST)
         if check_form.is_valid():
             form_obj = check_form.cleaned_data
@@ -80,7 +80,7 @@ def index(request):
             new_password = form_obj.get("new_password")
         else:
             _msg = check_form
-            logger.error('[异常]  请求方法：%s, 请求路径：%s, 错误信息：%s' % (request.method, request.path, _msg))
+            logger.error('[异常]  请求方法: %s, 请求路径: %s, 错误信息: %s' % (request.method, request.path, _msg))
             context = {
                 'global_title': TITLE,
                 'msg': _msg,
@@ -160,7 +160,7 @@ def reset_password(request):
                 if not _:
                     context = {
                         'global_title': TITLE,
-                        'msg': '🥹当前扫码的用户未激活或可能己离职, 用户信息如下：%s' % user_info,
+                        'msg': '🥹当前扫码的用户未激活或可能己离职, 用户信息如下: %s' % user_info,
                         'button_click': "window.location.href='%s'" % home_url,
                         'button_display': "返回主页"
                     }
@@ -211,7 +211,7 @@ def reset_password(request):
                     'button_click': "window.location.href='%s'" % home_url,
                     'button_display': "返回主页"
                 }
-                logger.error('[异常] ：%s' % str(callback_e))
+                logger.error('[异常] : %s' % str(callback_e))
                 return render(request, msg_template, context)
 
     # 重置密码页面, 输入新密码后点击提交
@@ -230,7 +230,7 @@ def reset_password(request):
                     'button_click': "window.location.href='%s'" % home_url,
                     'button_display': "返回主页"
                 }
-                logger.error('[异常] ：%s' % str(reset_e))
+                logger.error('[异常] : %s' % str(reset_e))
                 return render(request, msg_template, context)
         else:
             context = {

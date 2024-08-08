@@ -10,13 +10,13 @@ class CheckForm(c_forms.Form):
         min_length=8,
         max_length=30,
         error_messages={'required': '新密码不能为空.',
-                        'invalid': '密码必须包含数字，字母、特殊字符',
+                        'invalid': '密码必须包含数字, 字母、特殊字符',
                         'min_length': "密码长度不能小于8个字符",
                         'max_length': "密码长度不能大于30个字符"}
     )
     old_password = c_fields.CharField(error_messages={'required': '确认密码不能为空(ﾟДﾟ*)ﾉ'})
     ensure_password = c_fields.CharField(error_messages={'required': '确认密码不能为空(ﾟДﾟ*)ﾉ'})
-    username = c_fields.CharField(error_messages={'required': '账号不能为空(ﾟДﾟ*)ﾉ', 'invalid': '账号格式错误(。>︿<)_θ'})
+    username = c_fields.CharField(error_messages={'required': '账号不能为空(ﾟДﾟ*)ﾉ', 'invalid': '账号格式错误(>︿<)_θ'})
 
     def clean(self):
         pwd0 = self.cleaned_data.get('old_password')
@@ -25,7 +25,7 @@ class CheckForm(c_forms.Form):
         if pwd1 == pwd2:
             pass
         elif pwd0 == pwd1:
-            # 这里异常模块导入要放在函数里面，放到文件开头有时会报错，找不到
+            # 这里异常模块导入要放在函数里面, 放到文件开头有时会报错, 找不到
             from django.core.exceptions import ValidationError
             raise ValidationError('新旧密码不能一样🥹')
         else:

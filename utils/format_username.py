@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @FileName：     format_username.py
+# @FileName:      format_username.py
 # @Software:      
 # @Author:         Leven Xiang
 # @Mail:           xiangle0109@outlook.com
-# @Date：          2021/4/19 9:17
+# @Date:           2021/4/19 9:17
 
-# @ModifiedDate：  2024/8/6 11:15
-# @Content：       新增get_name_from_email函数
-# @Author：        邢传真
-# @Mail：          chuanzhen.xing@oebiotech.com
+# @ModifiedDate:   2024/8/6 11:15
+# @Content:        新增get_name_from_email函数
+# @Author:         邢传真
+# @Mail:           chuanzhen.xing@oebiotech.com
 import re
 from utils.ad_ops import AdOps
 
@@ -45,13 +45,13 @@ def get_name_from_email(ad_ops, account):
 def format2username(account):
     """
     已弃用
-    格式化账号，统一输出为用户名格式
-    :param account 用户账号可以是邮箱、DOMAIN\\username、username格式。
+    格式化账号, 统一输出为用户名格式
+    :param account 用户账号可以是邮箱、DOMAIN\\username、username格式
     :return: username
     """
     if account is None:
         return False, NameError(
-            "传入的用户账号为空！".format(account))
+            "传入的用户账号为空!".format(account))
     try:
         mail_compile = re.compile(r'(.*)@(.*)')
         domain_compile = re.compile(r'(.*)\\(.*)')
