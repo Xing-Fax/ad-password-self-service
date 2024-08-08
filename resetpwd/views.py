@@ -36,7 +36,7 @@ class PARAMS(object):
         corp_id = None
         app_id = WEWORK_CORP_ID
         agent_id = WEWORK_AGENT_ID
-        AUTH_APP = '微信'
+        AUTH_APP = '企微'
         from utils.wework_ops import WeWorkOps
         ops = WeWorkOps()
 
