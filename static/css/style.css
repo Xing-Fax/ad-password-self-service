@@ -6,6 +6,10 @@ html, body {
 body {
     font-family: "Microsoft Yahei", serif;
     background: #fafafa;
+    background-image: url("/static/img/main_back.png");
+    background-position: center center; /*将背景图片居中*/
+    background-repeat: no-repeat; /*禁止背景图片平铺*/
+    background-size: cover; /*背景图片铺满整个屏幕*/
 }
 
 a:link {
