@@ -37,10 +37,14 @@ def get_name_from_email(ad_ops, account):
         return False, NameError(
             "传入的用户账号为空！".format(account))
     try:
-        _ , result = ad_ops.ad_get_get_sAMAccountName_by_email(account)
-        if _ in False:
-            return False, NameError("常规错误: {}".format(result))
-        return True, result
+        # _ , result = ad_ops.ad_get_get_sAMAccountName_by_email(account)
+        # if _ in False:
+        #     return False, NameError("常规错误: ".format(account, e))
+        result = ad_ops.ad_get_get_sAMAccountName_by_email(account)
+        if result[0]:  
+            return True, result[1]
+        else:  
+            return False, NameError("常规错误: ".format(e))
     except Exception as e:
         return False, NameError("查询失败, 错误信息[{}]".format(e))
 
