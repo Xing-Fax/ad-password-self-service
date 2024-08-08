@@ -5,10 +5,9 @@
     font-style: normal;
 }  
 
-.rounded {  
-    border-radius: 10px; /* 或者使用具体的值，如5px, 15px等 */  
-}  
-
+button.layui-btn.layui-btn-normal.layui-btn-fluid, .layui-panel, .layui-quote-nm, .layui-form-item {
+    border-radius: 8px; /* 或者使用具体的值，如5px, 15px等 */
+}
 
 html, body {
     width: 100%;
@@ -24,14 +23,8 @@ body {
     background-size: cover;
 }
 
-blockquote{
-    background-color: #fafafa;
-}
-
 button{
-    /* background-color: #1965DC; */
     color: #1965DC;
-    border-radius: 10px;
 }
 
 h1 {
@@ -81,6 +74,6 @@ a:hover {
 .layui-elem-fieldset {
     margin-top: 10%;
     border-color: #b7b7b7;
-    border-radius: 6px;
+    border-radius: 8px;
     background: #ffffff;
 }
