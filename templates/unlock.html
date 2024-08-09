@@ -3,6 +3,7 @@
 {% block paneltitle %}🔓解锁账号{% endblock %}
 {% block middleblock %}
 <div class="layui-row">
+    <h3>注意: 已禁用的账号不会生效</h3>
     <form class="layui-form  layui-form-pane" name="unlockAccount" method="post" action="" autocomplete="off">{% csrf_token %}
         <div class="layui-form-item">
             <label class="layui-form-label">账号</label>
