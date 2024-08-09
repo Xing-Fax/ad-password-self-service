@@ -4,6 +4,8 @@
 {% block paneltitle %}🔑修改密码{% endblock %}
 {% block middleblock %}
 <div class="layui-row">
+    <p style="color: red; font-weight: bold;">这是加粗加红的文字。</p>
+
     <h3>请注意: 完成后您的<span style="color: red; font-weight: bold;">OA、Wiki知识库、WPS、电脑、运维平台、堡垒机账号</span>会同步修改</h3>
     <form class="layui-form  layui-form-pane" action="/" method="post" autocomplete="off">{% csrf_token %}
         <div class="layui-form-item">
