@@ -4,8 +4,6 @@
 {% block paneltitle %}🔑修改密码{% endblock %}
 {% block middleblock %}
 <div class="layui-row">
-    <p style="color: red; font-weight: bold;">这是加粗加红的文字。</p>
-
     <h3>请注意: 完成后您的<span style="color: red; font-weight: bold;">OA、Wiki知识库、WPS、电脑、运维平台、堡垒机账号</span>会同步修改</h3>
     <form class="layui-form  layui-form-pane" action="/" method="post" autocomplete="off">{% csrf_token %}
         <div class="layui-form-item">
@@ -45,10 +43,10 @@
 {% endblock %}
 {% block middleblockfoot %}
 <blockquote class="layui-elem-quote layui-quote-nm">
-    1、密码中必须同时包含大写字母、小写字母、数字、特殊符号三种以上<br>
-    2、密码长度必须大于等于8位, 最近3次使用过的密码不能使用<br>
+    1、密码中必须同时包含<span style="color: red; font-weight: bold;">大写字母、小写字母、数字、特殊符号三种</span>以上<br>
+    2、密码长度必须大于等于<span style="color: red; font-weight: bold;">8</span>位, 最近<span style="color: red; font-weight: bold;">3</span>次使用过的密码不能使用<br>
     3、禁止使用密码复杂度过低的弱密码, 如包含123456及简单英文字母的密码<br>
-    4、不能包含用户的帐户名, 不能包含用户姓名中超过两个连续字符的部分<br>
+    4、不能包含用户的<span style="color: red; font-weight: bold;">帐户名</span>, 不能包含<span style="color: red; font-weight: bold;">用户姓名中超过两个连续字符</span>用户姓名中超过两个连续字符的部分<br>
     <br>
     如果密码己遗忘, 可点击上方<b>[<i class="layui-icon layui-icon-refresh"></i> 重置/<i class="layui-icon layui-icon-password"></i>解锁账号]</b>使用{{ scan_app }}工作台内免登录授权并通过身份验证后进行重置/解锁账号<br>
     * 如果有当弹出提示<b>是否同意授权</b>时, 请务必<b>全部同意</b>, 否则无法获取关键信息, 导致无法正常使用重置/解锁账号!
