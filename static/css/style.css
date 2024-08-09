@@ -9,6 +9,10 @@ button.layui-btn.layui-btn-normal.layui-btn-fluid, .layui-panel, .layui-quote-nm
     border-radius: 8px; /* 或者使用具体的值，如5px, 15px等 */
 }
 
+.layui-field-title {
+    margin: 0;
+}
+
 html, body {
     width: 100%;
     height: 100%;
