@@ -5,7 +5,7 @@
 <div class="layui-row">
     <form class="layui-form  layui-form-pane" name="unlockAccount" method="post" action="" autocomplete="off">{% csrf_token %}
         <div class="layui-form-item">
-            <label class="layui-form-label">域账号</label>
+            <label class="layui-form-label">账号</label>
             <div class="layui-input-block">
                 <input type="text" name="username" lay-verify="required" lay-verType="tips" autocomplete="off" readonly value="{{ username }}" class="layui-input">
                 <input type="hidden" id="code" name="code" readonly value="{{ code }}">
